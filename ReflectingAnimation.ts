@@ -3,7 +3,7 @@ const ctx = canvas.getContext("2d");
 const WINDOW_WIDTH = canvas.width;
 const WINDOW_HEIGHT = canvas.height;
 
-let startX = 20;
+let startX = 80;
 let startY = 30;
 let vX = 600;
 let vY = 50;
@@ -37,7 +37,7 @@ function draw() {
     console.log(`current x: ${currentX}, current y: ${currentY}`);
 
     // right border and left border
-    if (currentX >= WINDOW_WIDTH - diameter / 2) {
+    if (currentX > WINDOW_WIDTH - diameter / 2 && vX > 0) {
         vX = -vX;
         startX = WINDOW_WIDTH - diameter / 2;
         startY = currentY;
@@ -46,7 +46,7 @@ function draw() {
         console.log(`vX = ${vX}`);
         console.log(`startX = ${startX}`);
         console.log(`right border hit`);
-    } else if (currentX <= diameter / 2) {
+    } else if (currentX < diameter / 2 && vX < 0) {
         vX = -vX;
         startX = diameter / 2;
         startY = currentY;
