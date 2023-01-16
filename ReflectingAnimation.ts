@@ -37,7 +37,7 @@ function draw() {
     console.log(`current x: ${currentX}, current y: ${currentY}`);
 
     // right border and left border
-    if (currentX >= WINDOW_WIDTH - diameter / 2) {
+    if (currentX > WINDOW_WIDTH - diameter / 2 && vX > 0) {
         vX = -vX;
         startX = WINDOW_WIDTH - diameter / 2;
         startY = currentY;
@@ -46,7 +46,7 @@ function draw() {
         console.log(`vX = ${vX}`);
         console.log(`startX = ${startX}`);
         console.log(`right border hit`);
-    } else if (currentX <= diameter / 2) {
+    } else if (currentX < diameter / 2 && vX < 0) {
         vX = -vX;
         startX = diameter / 2;
         startY = currentY;
