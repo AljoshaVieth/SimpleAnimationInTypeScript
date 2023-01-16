@@ -3,7 +3,7 @@ const ctx = canvas.getContext("2d");
 const WINDOW_WIDTH = canvas.width;
 const WINDOW_HEIGHT = canvas.height;
 
-let startX = 20;
+let startX = 80;
 let startY = 30;
 let vX = 600;
 let vY = 50;
