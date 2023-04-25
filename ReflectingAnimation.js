@@ -31,10 +31,10 @@ function draw() {
     currentX += deltaTime * vX;
     currentY += deltaTime * vY;
     console.log(`current x: ${currentX}, current y: ${currentY}`);
-    xPosDebug.textContent = "X-Position:" + Math.round(currentX);
-    yPosDebug.textContent = "Y-Position:" + Math.round(currentY);
-    vXDebug.textContent = "X-Velocity:" + vX;
-    vYDebug.textContent = "Y-Velocity:" + vY;
+    xPosDebug.textContent = "X-Position: " + Math.round(currentX);
+    yPosDebug.textContent = "Y-Position: " + Math.round(currentY);
+    vXDebug.textContent = "X-Velocity: " + vX;
+    vYDebug.textContent = "Y-Velocity: " + vY;
     if (vX > 0) {
         statusMessage = "Moving right...";
     }
@@ -61,10 +61,31 @@ function draw() {
         console.log(`startX = ${startX}`);
         console.log(`left border hit`);
     }
+    // top border and bottom border
+    if (currentY > WINDOW_HEIGHT - diameter / 2 && vY > 0) {
+        vY = -vY;
+        startY = WINDOW_HEIGHT - diameter / 2;
+        startX = currentX;
+        collisionTimestamp = currentTime;
+        console.log(`vX = ${vX}`);
+        console.log(`startX = ${startX}`);
+        console.log(`bottom border hit`);
+    }
+    else if (currentY < diameter / 2 && vY < 0) {
+        vY = -vY;
+        startY = diameter / 2;
+        startX = currentX;
+        collisionTimestamp = currentTime;
+        console.log(`vX = ${vX}`);
+        console.log(`startX = ${startX}`);
+        console.log(`top border hit`);
+    }
     ctx.fillStyle = "red";
-    ctx.beginPath();
+    ctx.beginPath(); // important, please research details
     ctx.arc(currentX, currentY, diameter / 2, 0, 2 * Math.PI);
     ctx.fill();
+    //ctx.strokeStyle = "red";
+    //ctx.stroke();
     lastTime = currentTime;
 }
 draw();

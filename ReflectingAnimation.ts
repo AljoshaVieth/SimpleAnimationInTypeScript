@@ -13,10 +13,10 @@ const ctx = canvas.getContext("2d");
 const WINDOW_WIDTH = canvas.width;
 const WINDOW_HEIGHT = canvas.height;
 
-let startX = 80;
-let startY = 30;
-let vX = 600;
-let vY = 50;
+let startX:number = 80;
+let startY:number = 30;
+let vX:number = 600;
+let vY:number = 50;
 const diameter = 50;
 
 let currentX = startX;
@@ -46,10 +46,10 @@ function draw() {
     currentX += deltaTime * vX;
     currentY += deltaTime * vY;
     console.log(`current x: ${currentX}, current y: ${currentY}`);
-    xPosDebug.textContent = "X-Position:" + Math.round(currentX);
-    yPosDebug.textContent = "Y-Position:" + Math.round(currentY);
-    vXDebug.textContent = "X-Velocity:"+vX;
-    vYDebug.textContent = "Y-Velocity:"+vY;
+    xPosDebug.textContent = "X-Position: " + Math.round(currentX);
+    yPosDebug.textContent = "Y-Position: " + Math.round(currentY);
+    vXDebug.textContent = "X-Velocity: "+vX;
+    vYDebug.textContent = "Y-Velocity: "+vY;
     if(vX > 0){
         statusMessage = "Moving right..."
     } else {
@@ -81,11 +81,34 @@ function draw() {
         console.log(`left border hit`);
     }
 
-    ctx.fillStyle = "red";
-    ctx.beginPath();
-    ctx.arc(currentX, currentY, diameter / 2, 0, 2 * Math.PI);
 
+     // top border and bottom border
+     if (currentY > WINDOW_HEIGHT - diameter / 2 && vY > 0) {
+        vY = -vY;
+        startY = WINDOW_HEIGHT - diameter / 2;
+        startX = currentX;
+        collisionTimestamp = currentTime;
+
+        console.log(`vX = ${vX}`);
+        console.log(`startX = ${startX}`);
+        console.log(`bottom border hit`);
+    } else if (currentY < diameter / 2 && vY < 0) {
+        vY = -vY;
+        startY = diameter / 2;
+        startX = currentX;
+        collisionTimestamp = currentTime;
+
+        console.log(`vX = ${vX}`);
+        console.log(`startX = ${startX}`);
+        console.log(`top border hit`);
+    }
+
+    ctx.fillStyle = "red";
+    ctx.beginPath(); // important, please research details
+    ctx.arc(currentX, currentY, diameter / 2, 0, 2* Math.PI);
     ctx.fill();
+    //ctx.strokeStyle = "red";
+    //ctx.stroke();
 
     lastTime = currentTime;
 }
